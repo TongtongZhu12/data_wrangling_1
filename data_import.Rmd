@@ -8,7 +8,6 @@ library(tidyverse)
 library(readxl)
 library(haven)
 ```
-
 ## Read in some data
 
 Read in the litters dataset.
@@ -17,6 +16,10 @@ Read in the litters dataset.
 litters_df = read_csv("./data/FAS_litters.csv")
 litters_df = janitor::clean_names(litters_df)
 ```
+```{r, evol = FALSE}
+view(litters_df)
+```
+
 
 ## Take a look at the data
 
