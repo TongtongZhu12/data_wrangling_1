@@ -68,6 +68,14 @@ litters_base = read.csv("data/FAS_litters.csv")
 litters_readr = read_csv("data/FAS_litters.csv")
 ```
 
+##Exporting data
+
+Export the mlb sub_table.
+
+```{r}
+write_csv(mlb_df, "./data/mlb_subtable.csv")
+```
+
 
 
 
