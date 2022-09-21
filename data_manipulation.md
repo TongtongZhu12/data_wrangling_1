@@ -424,3 +424,45 @@ mutate(
     ## # … with 39 more rows, and abbreviated variable names ¹​gd0_weight,
     ## #   ²​gd18_weight, ³​gd_of_birth, ⁴​pups_born_alive, ⁵​pups_dead_birth,
     ## #   ⁶​pups_survive
+
+## `arrange`
+
+``` r
+arrange(litters_df, pups_born_alive)
+```
+
+    ## # A tibble: 49 × 8
+    ##    group litter_number gd0_weight gd18_weight gd_of_bi…¹ pups_…² pups_…³ pups_…⁴
+    ##    <chr> <chr>              <dbl>       <dbl>      <dbl>   <dbl>   <dbl>   <dbl>
+    ##  1 Con7  #85                 19.7        34.7         20       3       4       3
+    ##  2 Low7  #111                25.5        44.6         20       3       2       3
+    ##  3 Low8  #4/84               21.8        35.2         20       4       0       4
+    ##  4 Con7  #5/4/2/95/2         28.5        44.1         19       5       1       4
+    ##  5 Con8  #2/2/95/2           NA          NA           19       5       0       4
+    ##  6 Mod7  #3/82/3-2           28          45.9         20       5       0       5
+    ##  7 Mod7  #5/3/83/5-2         22.6        37           19       5       0       5
+    ##  8 Mod7  #106                21.7        37.8         20       5       0       2
+    ##  9 Con7  #5/5/3/83/3-3       26          41.4         19       6       0       5
+    ## 10 Con7  #4/2/95/3-3         NA          NA           20       6       0       6
+    ## # … with 39 more rows, and abbreviated variable names ¹​gd_of_birth,
+    ## #   ²​pups_born_alive, ³​pups_dead_birth, ⁴​pups_survive
+
+``` r
+arrange(litters_df, pups_born_alive, gd0_weight)
+```
+
+    ## # A tibble: 49 × 8
+    ##    group litter_number gd0_weight gd18_weight gd_of_bi…¹ pups_…² pups_…³ pups_…⁴
+    ##    <chr> <chr>              <dbl>       <dbl>      <dbl>   <dbl>   <dbl>   <dbl>
+    ##  1 Con7  #85                 19.7        34.7         20       3       4       3
+    ##  2 Low7  #111                25.5        44.6         20       3       2       3
+    ##  3 Low8  #4/84               21.8        35.2         20       4       0       4
+    ##  4 Mod7  #106                21.7        37.8         20       5       0       2
+    ##  5 Mod7  #5/3/83/5-2         22.6        37           19       5       0       5
+    ##  6 Mod7  #3/82/3-2           28          45.9         20       5       0       5
+    ##  7 Con7  #5/4/2/95/2         28.5        44.1         19       5       1       4
+    ##  8 Con8  #2/2/95/2           NA          NA           19       5       0       4
+    ##  9 Low8  #99                 23.5        39           20       6       0       5
+    ## 10 Low7  #112                23.9        40.5         19       6       1       1
+    ## # … with 39 more rows, and abbreviated variable names ¹​gd_of_birth,
+    ## #   ²​pups_born_alive, ³​pups_dead_birth, ⁴​pups_survive
