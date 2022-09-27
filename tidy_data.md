@@ -157,3 +157,124 @@ fas_df =
   arrange(litter_number) %>% 
   relocate(litter_number, dose, day_of_tx)
 ```
+
+## Learning Assessment
+
+``` r
+surv_os = read_csv("./data/surv_os.csv") %>% 
+  janitor::clean_names() %>% 
+  rename(id = what_is_your_uni, os = what_operating_system_do_you_use)
+```
+
+    ## Rows: 173 Columns: 2
+    ## ── Column specification ────────────────────────────────────────────────────────
+    ## Delimiter: ","
+    ## chr (2): What is your UNI?, What operating system do you use?
+    ## 
+    ## ℹ Use `spec()` to retrieve the full column specification for this data.
+    ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+``` r
+surv_pr_git = read_csv("./data/surv_program_git.csv") %>% 
+  janitor::clean_names() %>% 
+  rename(
+    id = what_is_your_uni,
+    prog = what_is_your_degree_program,
+    git_exp = which_most_accurately_describes_your_experience_with_git)
+```
+
+    ## Rows: 135 Columns: 3
+    ## ── Column specification ────────────────────────────────────────────────────────
+    ## Delimiter: ","
+    ## chr (3): What is your UNI?, What is your degree program?, Which most accurat...
+    ## 
+    ## ℹ Use `spec()` to retrieve the full column specification for this data.
+    ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+``` r
+left_join(surv_os, surv_pr_git)
+```
+
+    ## Joining, by = "id"
+
+    ## # A tibble: 175 × 4
+    ##    id          os         prog  git_exp                                         
+    ##    <chr>       <chr>      <chr> <chr>                                           
+    ##  1 student_87  <NA>       MS    Pretty smooth: needed some work to connect Git,…
+    ##  2 student_106 Windows 10 Other Pretty smooth: needed some work to connect Git,…
+    ##  3 student_66  Mac OS X   MPH   Smooth: installation and connection with GitHub…
+    ##  4 student_93  Windows 10 MS    Smooth: installation and connection with GitHub…
+    ##  5 student_99  Mac OS X   MS    Smooth: installation and connection with GitHub…
+    ##  6 student_115 Mac OS X   MS    Smooth: installation and connection with GitHub…
+    ##  7 student_15  Windows 10 MPH   Pretty smooth: needed some work to connect Git,…
+    ##  8 student_15  Windows 10 MPH   Pretty smooth: needed some work to connect Git,…
+    ##  9 student_21  Windows 10 MPH   Pretty smooth: needed some work to connect Git,…
+    ## 10 student_86  Mac OS X   <NA>  <NA>                                            
+    ## # … with 165 more rows
+
+``` r
+inner_join(surv_os, surv_pr_git)
+```
+
+    ## Joining, by = "id"
+
+    ## # A tibble: 129 × 4
+    ##    id          os         prog  git_exp                                         
+    ##    <chr>       <chr>      <chr> <chr>                                           
+    ##  1 student_87  <NA>       MS    Pretty smooth: needed some work to connect Git,…
+    ##  2 student_106 Windows 10 Other Pretty smooth: needed some work to connect Git,…
+    ##  3 student_66  Mac OS X   MPH   Smooth: installation and connection with GitHub…
+    ##  4 student_93  Windows 10 MS    Smooth: installation and connection with GitHub…
+    ##  5 student_99  Mac OS X   MS    Smooth: installation and connection with GitHub…
+    ##  6 student_115 Mac OS X   MS    Smooth: installation and connection with GitHub…
+    ##  7 student_15  Windows 10 MPH   Pretty smooth: needed some work to connect Git,…
+    ##  8 student_15  Windows 10 MPH   Pretty smooth: needed some work to connect Git,…
+    ##  9 student_21  Windows 10 MPH   Pretty smooth: needed some work to connect Git,…
+    ## 10 student_59  Windows 10 MPH   Smooth: installation and connection with GitHub…
+    ## # … with 119 more rows
+
+``` r
+anti_join(surv_os, surv_pr_git)
+```
+
+    ## Joining, by = "id"
+
+    ## # A tibble: 46 × 2
+    ##    id          os                                     
+    ##    <chr>       <chr>                                  
+    ##  1 student_86  Mac OS X                               
+    ##  2 student_91  Windows 10                             
+    ##  3 student_24  Mac OS X                               
+    ##  4 student_103 Mac OS X                               
+    ##  5 student_163 Mac OS X                               
+    ##  6 student_68  Other (Linux, Windows, 95, TI-89+, etc)
+    ##  7 student_158 Mac OS X                               
+    ##  8 student_19  Windows 10                             
+    ##  9 student_43  Mac OS X                               
+    ## 10 student_78  Mac OS X                               
+    ## # … with 36 more rows
+
+``` r
+anti_join(surv_pr_git, surv_os)
+```
+
+    ## Joining, by = "id"
+
+    ## # A tibble: 15 × 3
+    ##    id         prog  git_exp                                                     
+    ##    <chr>      <chr> <chr>                                                       
+    ##  1 <NA>       MPH   "Pretty smooth: needed some work to connect Git, GitHub, an…
+    ##  2 student_17 PhD   "Pretty smooth: needed some work to connect Git, GitHub, an…
+    ##  3 <NA>       MPH   "Pretty smooth: needed some work to connect Git, GitHub, an…
+    ##  4 <NA>       MPH   "Pretty smooth: needed some work to connect Git, GitHub, an…
+    ##  5 <NA>       MS    "Pretty smooth: needed some work to connect Git, GitHub, an…
+    ##  6 student_53 MS    "Pretty smooth: needed some work to connect Git, GitHub, an…
+    ##  7 <NA>       MS    "Smooth: installation and connection with GitHub was easy"  
+    ##  8 student_80 PhD   "Pretty smooth: needed some work to connect Git, GitHub, an…
+    ##  9 student_16 MPH   "Smooth: installation and connection with GitHub was easy"  
+    ## 10 student_98 MS    "Smooth: installation and connection with GitHub was easy"  
+    ## 11 <NA>       MS    "Pretty smooth: needed some work to connect Git, GitHub, an…
+    ## 12 <NA>       MS    "What's \"Git\" ...?"                                       
+    ## 13 <NA>       MS    "Smooth: installation and connection with GitHub was easy"  
+    ## 14 <NA>       MPH   "Pretty smooth: needed some work to connect Git, GitHub, an…
+    ## 15 <NA>       MS    "Pretty smooth: needed some work to connect Git, GitHub, an…
